@@ -7,7 +7,7 @@ import { Utils } from "./api/Utils";
 var id = "riemann_xi_function";
 var name = "Riemann Xi Function"
 var description = "A basic theory.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "Killandotom";
 var version = 1;
 
 var currency;
