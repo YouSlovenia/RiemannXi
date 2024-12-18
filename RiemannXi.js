@@ -89,7 +89,7 @@ var tick = (elapsedTime, multiplier) => {
 }
 
 var getPrimaryEquation = () => {
-    let result = "\\xi{s} = \\frac{1}{2}s(s-1)\\pi^{-\\frac{s}{2}}\\gamma(\\frac{s}{2})\\zeta{s}";
+    let result = "\\xi(s)= \\frac{1}{2}s(s-1)\\pi^{-\\frac{s}{2}}\\gamma(\\frac{s}{2})\\zeta(s)";
 
   return result;
 }
