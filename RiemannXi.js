@@ -11,7 +11,7 @@ var authors = "Killandotom";
 var version = 1;
 
 var currency;
-var c1, c2;
+var t, c2;
 var c1Exp, c2Exp;
 
 var achievement1, achievement2;
