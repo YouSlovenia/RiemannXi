@@ -67,12 +67,12 @@ var init = () => {
     
     /////////////////
     //// Achievements
-    achievement1 = theory.createAchievement(0, "Achievement 1", "Description 1", () => c1.level > 1);
+    achievement1 = theory.createAchievement(0, "Achievement 1", "Description 1", () => t.level > 1);
     achievement2 = theory.createSecretAchievement(1, "Achievement 2", "Description 2", "Maybe you should buy two levels of c2?", () => c2.level > 1);
 
     ///////////////////
     //// Story chapters
-    chapter1 = theory.createStoryChapter(0, "My First Chapter", "This is line 1,\nand this is line 2.\n\nNice.", () => c1.level > 0);
+    chapter1 = theory.createStoryChapter(0, "My First Chapter", "This is line 1,\nand this is line 2.\n\nNice.", () => t.level > 0);
     chapter2 = theory.createStoryChapter(1, "My Second Chapter", "This is line 1 again,\nand this is line 2... again.\n\nNice again.", () => c2.level > 0);
 
     updateAvailability();
@@ -85,7 +85,7 @@ var updateAvailability = () => {
 var tick = (elapsedTime, multiplier) => {
     let dt = BigNumber.from(elapsedTime * multiplier);
     let bonus = theory.publicationMultiplier;
-    currency.value += dt * bonus * getT(c1.level).pow(getC1Exponent(c1Exp.level)) *
+    currency.value += dt * bonus * getT(t.level).pow(getC1Exponent(c1Exp.level)) *
                                    getC2(c2.level).pow(getC2Exponent(c2Exp.level));
 }
 
