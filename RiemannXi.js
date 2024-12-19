@@ -41,6 +41,15 @@ var init = () => {
         a1.getInfo = (amount) => Utils.getMathTo(getInfo(a1.level), getInfo(a1.level + amount));
     }
 
+    // a2
+    {
+        let getDesc = (level) => "a_2=2^{" + level + "}";
+        let getInfo = (level) => "a_2=" + getA2(level).toString(0);
+        a2 = theory.createUpgrade(1, currency, new ExponentialCost(75, Math.log2(10)));
+        a2.getDescription = (_) => Utils.getMath(getDesc(a2.level));
+        a2.getInfo = (amount) => Utils.getMathTo(getInfo(a2.level), getInfo(a2.level + amount));
+    }
+
     /////////////////////
     // Permanent Upgrades
     theory.createPublicationUpgrade(0, currency, 1e10);
