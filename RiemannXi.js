@@ -32,13 +32,13 @@ var init = () => {
         t.maxLevel = 4
     }
 
-    // c2
+    // a1
     {
-        let getDesc = (level) => "c_2=2^{" + level + "}";
-        let getInfo = (level) => "c_2=" + getC2(level).toString(0);
-        c2 = theory.createUpgrade(1, currency, new ExponentialCost(5, Math.log2(10)));
-        c2.getDescription = (_) => Utils.getMath(getDesc(c2.level));
-        c2.getInfo = (amount) => Utils.getMathTo(getInfo(c2.level), getInfo(c2.level + amount));
+        let getDesc = (level) => "a_1=1.5^{" + level + "}";
+        let getInfo = (level) => "a_1=" + getA1(level).toString(0);
+        a1 = theory.createUpgrade(1, currency, new ExponentialCost(5, Math.log2(10)));
+        a1.getDescription = (_) => Utils.getMath(getDesc(a1.level));
+        a1.getInfo = (amount) => Utils.getMathTo(getInfo(a1.level), getInfo(a1.level + amount));
     }
 
     /////////////////////
@@ -68,7 +68,7 @@ var init = () => {
     /////////////////
     //// Achievements
     achievement1 = theory.createAchievement(0, "Achievement 1", "Description 1", () => t.level > 1);
-    achievement2 = theory.createSecretAchievement(1, "Achievement 2", "Description 2", "Maybe you should buy two levels of c2?", () => c2.level > 1);
+    achievement2 = theory.createSecretAchievement(1, "Achievement 2", "Description 2", "Maybe you should buy two levels of a1?", () => a1.level > 1);
 
     ///////////////////
     //// Story chapters
@@ -86,7 +86,7 @@ var tick = (elapsedTime, multiplier) => {
     let dt = BigNumber.from(elapsedTime * multiplier);
     let bonus = theory.publicationMultiplier;
     currency.value += dt * bonus * getT(t.level).pow(getC1Exponent(c1Exp.level)) *
-                                   getC2(c2.level).pow(getC2Exponent(c2Exp.level));
+                                   getA1(c2.level).pow(getC2Exponent(c2Exp.level));
 }
 
 var getPrimaryEquation = () => {
@@ -102,7 +102,7 @@ var getTau = () => currency.value.pow(0.5);
 var get2DGraphValue = () => currency.value.sign * (BigNumber.ONE + currency.value.abs()).log10().toNumber();
 
 var getT = (level) => Utils.getStepwisePowerSum(level, 2, 10, 0);
-var getC2 = (level) => BigNumber.TWO.pow(level);
+var getA1 = (level) => BigNumber.from(1.5).pow(level);
 var getC1Exponent = (level) => BigNumber.from(1 + 0.05 * level);
 var getC2Exponent = (level) => BigNumber.from(1 + 0.05 * level);
 
