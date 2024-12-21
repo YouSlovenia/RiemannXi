@@ -11,7 +11,7 @@ var authors = "Killandotom";
 var version = 1;
 
 var currency;
-var t, c2;
+var t, a1, a2, a3;
 var c1Exp, c2Exp;
 
 var achievement1, achievement2;
@@ -48,6 +48,15 @@ var init = () => {
         a2 = theory.createUpgrade(2, currency, new ExponentialCost(75, Math.log2(10)));
         a2.getDescription = (_) => Utils.getMath(getDesc(a2.level));
         a2.getInfo = (amount) => Utils.getMathTo(getInfo(a2.level), getInfo(a2.level + amount));
+    }
+
+    // a3
+    {
+        let getDesc = (level) => "a_3=1.7^{" + level + "}";
+        let getInfo = (level) => "a_3=" + getA3(level).toString(0);
+        a3 = theory.createUpgrade(2, currency, new ExponentialCost(500, Math.log2(10)));
+        a3.getDescription = (_) => Utils.getMath(getDesc(a3.level));
+        a3.getInfo = (amount) => Utils.getMathTo(getInfo(a3.level), getInfo(a3.level + amount));
     }
 
     /////////////////////
@@ -95,7 +104,7 @@ var tick = (elapsedTime, multiplier) => {
     let dt = BigNumber.from(elapsedTime * multiplier);
     let bonus = theory.publicationMultiplier;
     currency.value += dt * bonus * getT(t.level).pow(getC1Exponent(c1Exp.level)) *
-                                   getA1(a1.level).pow(getC2Exponent(c2Exp.level));
+                                   getA1(a1.level).pow(getC2Exponent(c2Exp.level)); * getA2(a2.level) * getA3(a3.level)
 }
 
 var getPrimaryEquation = () => {
@@ -112,6 +121,8 @@ var get2DGraphValue = () => currency.value.sign * (BigNumber.ONE + currency.valu
 
 var getT = (level) => Utils.getStepwisePowerSum(level, 2, 10, 0);
 var getA1 = (level) => BigNumber.from(1.5).pow(level);
+var getA2 = (level) => BigNumber.from(2).pow(level);
+var getA3 = (level) => BigNumber.from(1.7).pow(level);
 var getC1Exponent = (level) => BigNumber.from(1 + 0.05 * level);
 var getC2Exponent = (level) => BigNumber.from(1 + 0.05 * level);
 
